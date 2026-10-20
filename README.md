@@ -12,10 +12,10 @@ npm run dev
 Brauzer: http://localhost:5173. Bir xil tarmoqdagi telefonlarda kompyuterning lokal IP manzili va 5173 portini oching. Har bir o‘yinchi alohida qurilma yoki brauzer sessiyasidan kiradi.
 
 ## Ishlash tartibi
-1. Ism kiriting va xona yarating.
+1. Ism va Male (O‘g‘il bola) / Female (Qiz bola) tanlovini kiriting va xona yarating.
 2. Olti belgili xona kodini do‘stlaringizga bering (2–12 kishi).
 3. Xona egasi boshlaydi. Navbatdagi o‘yinchi tur tanlaydi.
-4. 60 soniya ichida «Bajardim» 10 ball beradi; «O‘tkazish» ball bermaydi. Vaqt tugasa navbat avtomatik almashadi.
+4. Haqiqat uchun 60 soniya, jasorat uchun 180 soniya ichida «Bajardim» 10 ball beradi; «O‘tkazish» ball bermaydi. Vaqt tugasa navbat avtomatik almashadi.
 5. Xona egasi o‘yinni yakunlaydi; natija PostgreSQL sozlangan bo‘lsa bazaga yoziladi.
 
 Topshiriqlar takrorlanmasdan tanlanadi. Xona egasi o‘z topshiriqlarini qo‘sha oladi. Sahifa yangilanganda sessionStorage tokeni bilan qayta ulaniladi. Aloqa uzilgan o‘yinchining navbati o‘tkaziladi; egasi uzilsa boshqaruv boshqa ulangan o‘yinchiga beriladi. Ball o‘yinchining o‘zi tasdiqlashi asosida beriladi.
@@ -39,3 +39,5 @@ npm test
 npm run build
 ```
 GitHubga kod yuklashning o‘zi jonli sayt yaratmaydi. `.env`, parollar va node_modules gitga qo‘shilmaydi.
+
+Jasorat: 8 ta umumiy, har bir tanlov uchun 12 tadan alohida shart. Ochiq joydagi muloqot faqat rozilik bilan; topshiriqni o‘tkazish doim mumkin.

@@ -22,10 +22,10 @@ io.on('connection',socket=>{
   if(action==='create'||action==='join'||action==='resume'){
    if(socket.data.code)throw Error('Avval hozirgi xonadan chiqing.');
    let r,p;
-   if(action==='create')({room:r,p}=createRoom(data.name));
+   if(action==='create')({room:r,p}=createRoom(data.name,data.gender));
    else {r=rooms.get(String(data.code).toUpperCase());if(!r)throw Error('Xona topilmadi.');
     if(action==='resume'){p=r.players.find(x=>x.token===data.token);if(!p)throw Error('Sessiya tugagan.');if(p.online)throw Error('O‘yinchi boshqa oynada ulangan.');p.online=true;}
-    else {if(r.phase!=='lobby')throw Error('O‘yin boshlangan.');if(r.players.length>=12)throw Error('Xona to‘lgan.');p=player(data.name);r.players.push(p);}}
+    else {if(r.phase!=='lobby')throw Error('O‘yin boshlangan.');if(r.players.length>=12)throw Error('Xona to‘lgan.');p=player(data.name,data.gender);r.players.push(p);}}
    if(!r.players.some(x=>x.id===r.host&&x.online))r.host=p.id;
    socket.data={code:r.code,id:p.id};socket.join(r.code);ack({ok:true,session:{code:r.code,token:p.token,id:p.id}});emit(r);return;
   }
