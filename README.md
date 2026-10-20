@@ -64,3 +64,6 @@ Server sozlamalari `DATA_DIR` ichida `settings.json`, parol xeshi `admin.json` f
 5. `npm test` va `npm run build` bilan tekshiring. GitHub `main` ga yuklang, keyin hostingning yangi commitni joylashtirganini tekshiring.
 
 Panelda saqlangan sozlamalar boshlang‘ich ranglar va shartlardan ustun turadi. Boshlang‘ich kodni o‘zgartirgandan keyin kerak bo‘lsa paneldagi qiymatlarni ham yangilang.
+
+### Tasodifiy navbat
+Birinchi va keyingi o‘yinchini server kriptografik random orqali tanlaydi. Bir davrada har bir onlayn o‘yinchi bir martadan tanlanadi. Yangi davra boshida oldingi o‘yinchi darhol takrorlanmaydi (kamida ikki onlayn o‘yinchi bo‘lsa). Ulanmaganlar navbatga kirmaydi. Bajarish, o‘tkazish va vaqt tugashi bir xil random navbat qoidasidan foydalanadi.
