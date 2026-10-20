@@ -1,4 +1,6 @@
 import 'dotenv/config';
+import {settings} from './settings.js';
+import {adminRouter} from './admin.js';
 import express from 'express';
 import {createServer} from 'node:http';
 import {Server} from 'socket.io';
@@ -9,6 +11,9 @@ import {rooms,createRoom,player,view,active,choose,advance} from './game.js';
 const app=express(),http=createServer(app);
 const origins=process.env.CLIENT_ORIGIN?.split(',');
 const io=new Server(http,{cors:origins?{origin:origins}:undefined,maxHttpBufferSize:16000});
+app.set('trust proxy',1);
+app.get('/api/settings',(_,res)=>{const {prompts,...publicSettings}=settings();res.set('Cache-Control','no-store').json(publicSettings);});
+app.use('/api/admin',adminRouter(value=>{const {prompts,...publicSettings}=value;io.emit('settings',publicSettings);}));
 let db;
 if(process.env.DATABASE_URL){db=new Pool({connectionString:process.env.DATABASE_URL});await db.query('CREATE TABLE IF NOT EXISTS game_results (id BIGSERIAL PRIMARY KEY, room_code TEXT NOT NULL, players JSONB NOT NULL, created_at TIMESTAMPTZ DEFAULT NOW())');}
 app.get('/api/health',(_,res)=>res.json({ok:true,persistence:!!db}));

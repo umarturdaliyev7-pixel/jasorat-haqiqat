@@ -41,3 +41,26 @@ npm run build
 GitHubga kod yuklashning o‘zi jonli sayt yaratmaydi. `.env`, parollar va node_modules gitga qo‘shilmaydi.
 
 Jasorat: 8 ta umumiy, har bir tanlov uchun 12 tadan alohida shart. Ochiq joydagi muloqot faqat rozilik bilan; topshiriqni o‘tkazish doim mumkin.
+
+## Admin panel va uslubni o‘zgartirish
+`/admin` sahifasi — faqat admin paroli bilan kiriladi. `.env` da `ADMIN_PASSWORD` (kamida 12 belgi) va uzun tasodifiy `ADMIN_SECRET` belgilang. Haqiqiy parollarni GitHubga yuklamang. Birinchi kirishdan keyin panelda parolni o‘zgartirish mumkin. Admin sessiya 8 soat; parol o‘zgarsa eski sessiyalar bekor bo‘ladi.
+
+Paneldan:
+- sayt nomi va bosh sarlavhalar;
+- fon, karta, matn va tugma ranglari, shrift o‘lchami va burchaklar;
+- haqiqat/jasorat vaqti va ball;
+- haqiqat, umumiy jasorat, male va female shartlarini qo‘shish/tahrirlash/o‘chirish;
+- JSON eksport/import va admin parolini almashtirish.
+
+«Saqlash» bosilganda dizayn ulangan o‘yinchilarga darhol yuboriladi. Vaqt, ball va matnlar keyingi shartga qo‘llanadi. Joriy topshiriq o‘z vaqti va ballini saqlaydi. JSON import hali saqlash emas — uni ko‘rib Saqlashni bosing.
+
+Server sozlamalari `DATA_DIR` ichida `settings.json`, parol xeshi `admin.json` faylida turadi. Lokal standart `./data`. Hostingda doimiy volume `/data` va `DATA_DIR=/data` kerak; aks holda qayta deployda sozlamalar yo‘qoladi. Saqlash atomik, versiya tekshiruvi bilan. O‘yin xonalari bundan alohida, hali ham operativ xotirada.
+
+### VS Code bilan kodni o‘zgartirish
+1. ZIPni oching va papkani VS Code’da oching.
+2. Terminalda `npm install`, so‘ng `.env.example` dan `.env` yarating va admin parolini belgilang.
+3. `npm run dev` bilan http://localhost:5173 ni oching; admin: http://localhost:5173/admin.
+4. `client/src/style.css` — uslub; `client/src/main.jsx` — o‘yin; `client/src/Admin.jsx` — boshqaruv paneli; `server/prompts.js` — boshlang‘ich shartlar.
+5. `npm test` va `npm run build` bilan tekshiring. GitHub `main` ga yuklang, keyin hostingning yangi commitni joylashtirganini tekshiring.
+
+Panelda saqlangan sozlamalar boshlang‘ich ranglar va shartlardan ustun turadi. Boshlang‘ich kodni o‘zgartirgandan keyin kerak bo‘lsa paneldagi qiymatlarni ham yangilang.

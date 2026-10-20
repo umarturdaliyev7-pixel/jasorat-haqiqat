@@ -1,0 +1,3 @@
+import {useEffect,useState} from 'react';
+export function applyTheme(config){if(!config)return;document.title=config.title;for(const [key,value]of Object.entries(config.theme||{})){document.documentElement.style.setProperty('--jh-'+key,['fontSize','radius'].includes(key)?value+'px':value);}}
+export function useSettings(socket){const [config,setConfig]=useState(null);useEffect(()=>{fetch('/api/settings').then(r=>r.ok?r.json():null).then(c=>{if(c){setConfig(c);applyTheme(c);}}).catch(()=>{});const update=c=>{setConfig(c);applyTheme(c);};socket.on('settings',update);return()=>socket.off('settings',update);},[socket]);return config;}
